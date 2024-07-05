@@ -23,13 +23,15 @@ public class TutorialServiceTest {
 
   @Test
   public void testFindByTitleContaining() {
-    List<Tutorial> tutorials = tutorialService.findByTitleContaining("Test");
+    String title = "Test";
+    List<Tutorial> tutorials = tutorialService.findByTitleContaining(title);
     assertNotNull(tutorials);
   }
 
   @Test
   public void testFindById() {
-    Tutorial tutorial = tutorialService.findById(1L);
+    long id = 1;
+    Tutorial tutorial = tutorialService.findById(id);
     assertNotNull(tutorial);
   }
 
@@ -37,15 +39,20 @@ public class TutorialServiceTest {
   public void testSave() {
     Tutorial tutorial = new Tutorial();
     tutorial.setTitle("Test");
-    tutorial = tutorialService.save(tutorial);
-    assertNotNull(tutorial);
-    assertEquals("Test", tutorial.getTitle());
+    tutorial.setDescription("Test Description");
+    tutorial.setPublished(false);
+    Tutorial savedTutorial = tutorialService.save(tutorial);
+    assertNotNull(savedTutorial);
+    assertEquals(tutorial.getTitle(), savedTutorial.getTitle());
+    assertEquals(tutorial.getDescription(), savedTutorial.getDescription());
+    assertEquals(tutorial.isPublished(), savedTutorial.isPublished());
   }
 
   @Test
   public void testDeleteById() {
-    tutorialService.deleteById(1L);
-    Tutorial tutorial = tutorialService.findById(1L);
+    long id = 1;
+    tutorialService.deleteById(id);
+    Tutorial tutorial = tutorialService.findById(id);
     assertNull(tutorial);
   }
 
@@ -58,7 +65,8 @@ public class TutorialServiceTest {
 
   @Test
   public void testFindByPublished() {
-    List<Tutorial> tutorials = tutorialService.findByPublished(true);
+    boolean isPublished = false;
+    List<Tutorial> tutorials = tutorialService.findByPublished(isPublished);
     assertNotNull(tutorials);
   }
 }

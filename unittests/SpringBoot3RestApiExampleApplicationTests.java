@@ -20,15 +20,12 @@ public class SpringBoot3RestApiExampleApplicationTests {
 
 	@Test
 	public void testMainWithArgs() {
-		SpringBoot3RestApiExampleApplication.main(new String[] {"--spring.profiles.active=test"});
+		SpringBoot3RestApiExampleApplication.main(new String[] {"arg1", "arg2"});
 	}
 
 	@Test
-	public void testMainWithInvalidArgs() {
-		try {
-			SpringBoot3RestApiExampleApplication.main(new String[] {"--invalid"});
-		} catch (Exception e) {
-			assertTrue(e instanceof IllegalArgumentException);
-		}
+	public void testMainWithNullArgs() {
+		SpringBoot3RestApiExampleApplication.main(null);
 	}
+
 }

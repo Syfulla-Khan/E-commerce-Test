@@ -12,6 +12,8 @@ public class SpringBoot3RestApiExampleApplicationTests {
 	public void contextLoads() {
 	}
 
-	// Add more test cases here to cover all the scenarios and functionalities
-
+	@Test
+	public void main() {
+		SpringBoot3RestApiExampleApplication.main(new String[] {});
+	}
 }

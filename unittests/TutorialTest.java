@@ -47,5 +47,4 @@ public class TutorialTest {
     String expectedString = "Tutorial [id=0, title=Test title, desc=Test description, published=true]";
     assertEquals(expectedString, tutorial.toString());
   }
-
 }

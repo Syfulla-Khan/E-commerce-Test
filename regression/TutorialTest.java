@@ -1,7 +1,7 @@
 package com.bezkoder.spring.restapi.model;
 
-import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 public class TutorialTest {
 
@@ -16,8 +16,8 @@ public class TutorialTest {
   @Test
   public void testSetId() {
     Tutorial tutorial = new Tutorial();
-    tutorial.setId(1L);
-    assertEquals(1L, tutorial.getId());
+    tutorial.setId(1);
+    assertEquals(1, tutorial.getId());
   }
 
   @Test

@@ -1,8 +1,8 @@
 package com.bezkoder.spring.restapi.service;
 
-import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 import java.util.List;
 import com.bezkoder.spring.restapi.model.Tutorial;
 
@@ -39,9 +39,11 @@ public class TutorialServiceTest {
   public void testSave() {
     Tutorial tutorial = new Tutorial();
     tutorial.setTitle("Test");
-    tutorial = tutorialService.save(tutorial);
-    assertNotNull(tutorial);
-    assertEquals("Test", tutorial.getTitle());
+    tutorial.setPublished(true);
+    Tutorial savedTutorial = tutorialService.save(tutorial);
+    assertNotNull(savedTutorial);
+    assertEquals(tutorial.getTitle(), savedTutorial.getTitle());
+    assertTrue(savedTutorial.isPublished());
   }
 
   @Test

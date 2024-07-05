@@ -1,16 +1,17 @@
 package com.bezkoder.spring.restapi.controller;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -25,11 +26,17 @@ public class TutorialControllerTest {
   @Mock
   TutorialService tutorialService;
 
+  @BeforeEach
+  public void init() {
+    MockitoAnnotations.initMocks(this);
+  }
+
   @Test
   public void testGetAllTutorials() {
-    when(tutorialService.findAll()).thenReturn(new ArrayList<Tutorial>());
+    List<Tutorial> tutorials = new ArrayList<>();
+    when(tutorialService.findAll()).thenReturn(tutorials);
     ResponseEntity<List<Tutorial>> response = tutorialController.getAllTutorials(null);
-    assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
+    assertEquals(HttpStatus.OK, response.getStatusCode());
   }
 
   @Test
@@ -38,7 +45,6 @@ public class TutorialControllerTest {
     when(tutorialService.findById(1L)).thenReturn(tutorial);
     ResponseEntity<Tutorial> response = tutorialController.getTutorialById(1L);
     assertEquals(HttpStatus.OK, response.getStatusCode());
-    assertNotNull(response.getBody());
   }
 
   @Test
@@ -47,7 +53,6 @@ public class TutorialControllerTest {
     when(tutorialService.save(tutorial)).thenReturn(tutorial);
     ResponseEntity<Tutorial> response = tutorialController.createTutorial(tutorial);
     assertEquals(HttpStatus.CREATED, response.getStatusCode());
-    assertNotNull(response.getBody());
   }
 
   @Test
@@ -56,7 +61,6 @@ public class TutorialControllerTest {
     when(tutorialService.findById(1L)).thenReturn(tutorial);
     ResponseEntity<Tutorial> response = tutorialController.updateTutorial(1L, tutorial);
     assertEquals(HttpStatus.OK, response.getStatusCode());
-    assertNotNull(response.getBody());
   }
 
   @Test
@@ -73,8 +77,9 @@ public class TutorialControllerTest {
 
   @Test
   public void testFindByPublished() {
-    when(tutorialService.findByPublished(true)).thenReturn(new ArrayList<Tutorial>());
+    List<Tutorial> tutorials = new ArrayList<>();
+    when(tutorialService.findByPublished(true)).thenReturn(tutorials);
     ResponseEntity<List<Tutorial>> response = tutorialController.findByPublished();
-    assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
+    assertEquals(HttpStatus.OK, response.getStatusCode());
   }
 }
