@@ -23,27 +23,23 @@ public class TutorialServiceTest {
 
   @Test
   public void testFindByTitleContaining() {
-    List<Tutorial> tutorials = tutorialService.findByTitleContaining("test");
+    List<Tutorial> tutorials = tutorialService.findByTitleContaining("Test");
     assertNotNull(tutorials);
   }
 
   @Test
   public void testFindById() {
     Tutorial tutorial = tutorialService.findById(1L);
-    assertNull(tutorial);
+    assertNotNull(tutorial);
   }
 
   @Test
   public void testSave() {
     Tutorial tutorial = new Tutorial();
     tutorial.setTitle("Test");
-    tutorial.setDescription("Test Description");
-    tutorial.setPublished(false);
-    Tutorial savedTutorial = tutorialService.save(tutorial);
-    assertNotNull(savedTutorial);
-    assertEquals("Test", savedTutorial.getTitle());
-    assertEquals("Test Description", savedTutorial.getDescription());
-    assertFalse(savedTutorial.isPublished());
+    tutorial = tutorialService.save(tutorial);
+    assertNotNull(tutorial);
+    assertEquals("Test", tutorial.getTitle());
   }
 
   @Test

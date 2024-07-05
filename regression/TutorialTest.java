@@ -16,8 +16,8 @@ public class TutorialTest {
   @Test
   public void testSetId() {
     Tutorial tutorial = new Tutorial();
-    tutorial.setId(1);
-    assertEquals(1, tutorial.getId());
+    tutorial.setId(1L);
+    assertEquals(1L, tutorial.getId());
   }
 
   @Test

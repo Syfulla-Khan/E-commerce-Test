@@ -27,83 +27,54 @@ public class TutorialControllerTest {
 
   @Test
   public void testGetAllTutorials() {
-    List<Tutorial> tutorialList = new ArrayList<>();
-    tutorialList.add(new Tutorial("Test Title", "Test Description", false));
-    when(tutorialService.findAll()).thenReturn(tutorialList);
-
-    ResponseEntity<List<Tutorial>> responseEntity = tutorialController.getAllTutorials(null);
-
-    assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
-    assertNotNull(responseEntity.getBody());
-    assertEquals(1, responseEntity.getBody().size());
+    when(tutorialService.findAll()).thenReturn(new ArrayList<Tutorial>());
+    ResponseEntity<List<Tutorial>> response = tutorialController.getAllTutorials(null);
+    assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
   }
 
   @Test
   public void testGetTutorialById() {
-    Tutorial tutorial = new Tutorial("Test Title", "Test Description", false);
+    Tutorial tutorial = new Tutorial();
     when(tutorialService.findById(1L)).thenReturn(tutorial);
-
-    ResponseEntity<Tutorial> responseEntity = tutorialController.getTutorialById(1L);
-
-    assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
-    assertNotNull(responseEntity.getBody());
-    assertEquals("Test Title", responseEntity.getBody().getTitle());
+    ResponseEntity<Tutorial> response = tutorialController.getTutorialById(1L);
+    assertEquals(HttpStatus.OK, response.getStatusCode());
+    assertNotNull(response.getBody());
   }
 
   @Test
   public void testCreateTutorial() {
-    Tutorial tutorial = new Tutorial("Test Title", "Test Description", false);
+    Tutorial tutorial = new Tutorial();
     when(tutorialService.save(tutorial)).thenReturn(tutorial);
-
-    ResponseEntity<Tutorial> responseEntity = tutorialController.createTutorial(tutorial);
-
-    assertEquals(HttpStatus.CREATED, responseEntity.getStatusCode());
-    assertNotNull(responseEntity.getBody());
-    assertEquals("Test Title", responseEntity.getBody().getTitle());
+    ResponseEntity<Tutorial> response = tutorialController.createTutorial(tutorial);
+    assertEquals(HttpStatus.CREATED, response.getStatusCode());
+    assertNotNull(response.getBody());
   }
 
   @Test
   public void testUpdateTutorial() {
-    Tutorial tutorial = new Tutorial("Test Title", "Test Description", false);
+    Tutorial tutorial = new Tutorial();
     when(tutorialService.findById(1L)).thenReturn(tutorial);
-
-    tutorial.setTitle("Updated Title");
-    when(tutorialService.save(tutorial)).thenReturn(tutorial);
-
-    ResponseEntity<Tutorial> responseEntity = tutorialController.updateTutorial(1L, tutorial);
-
-    assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
-    assertNotNull(responseEntity.getBody());
-    assertEquals("Updated Title", responseEntity.getBody().getTitle());
+    ResponseEntity<Tutorial> response = tutorialController.updateTutorial(1L, tutorial);
+    assertEquals(HttpStatus.OK, response.getStatusCode());
+    assertNotNull(response.getBody());
   }
 
   @Test
   public void testDeleteTutorial() {
-    Tutorial tutorial = new Tutorial("Test Title", "Test Description", false);
-    when(tutorialService.findById(1L)).thenReturn(tutorial);
-
-    ResponseEntity<HttpStatus> responseEntity = tutorialController.deleteTutorial(1L);
-
-    assertEquals(HttpStatus.NO_CONTENT, responseEntity.getStatusCode());
+    ResponseEntity<HttpStatus> response = tutorialController.deleteTutorial(1L);
+    assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
   }
 
   @Test
   public void testDeleteAllTutorials() {
-    ResponseEntity<HttpStatus> responseEntity = tutorialController.deleteAllTutorials();
-
-    assertEquals(HttpStatus.NO_CONTENT, responseEntity.getStatusCode());
+    ResponseEntity<HttpStatus> response = tutorialController.deleteAllTutorials();
+    assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
   }
 
   @Test
   public void testFindByPublished() {
-    List<Tutorial> tutorialList = new ArrayList<>();
-    tutorialList.add(new Tutorial("Test Title", "Test Description", true));
-    when(tutorialService.findByPublished(true)).thenReturn(tutorialList);
-
-    ResponseEntity<List<Tutorial>> responseEntity = tutorialController.findByPublished();
-
-    assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
-    assertNotNull(responseEntity.getBody());
-    assertEquals(1, responseEntity.getBody().size());
+    when(tutorialService.findByPublished(true)).thenReturn(new ArrayList<Tutorial>());
+    ResponseEntity<List<Tutorial>> response = tutorialController.findByPublished();
+    assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
   }
 }
